@@ -16,6 +16,8 @@
 	<description>Demo project for Spring Repository</description>
 	<properties>
 		<java.version>11</java.version>
+		<springfox-boot-starter.version>3.0.0</springfox-boot-starter.version>
+		<springfox-swagger-ui.version>3.0.0</springfox-swagger-ui.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -68,12 +70,12 @@
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-boot-starter</artifactId>
-            <version>3.0.0</version>
+            <version>${springfox-boot-starter.version}</version>
         </dependency>
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
-            <version>3.0.0</version>
+            <version>${springfox-swagger-ui.version}</version>
         </dependency>
 		
 	</dependencies>
