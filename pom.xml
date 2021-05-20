@@ -11,7 +11,6 @@
 	<groupId>com.umer</groupId>
 	<artifactId>simple-fake-bank</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
 	<name>simple-fake-bank</name>
 	<description>Demo project for Spring Repository</description>
 	<properties>
