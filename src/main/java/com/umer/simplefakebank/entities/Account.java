@@ -7,6 +7,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
@@ -39,5 +41,9 @@ public class Account {
 	@NotNull
 	@Column(name = TABLE_PREFIX + "balance")
 	private BigDecimal balance;
+
+	@ManyToOne
+	@JoinColumn(name = TABLE_PREFIX + "id_user")
+	private User user;
 
 }
