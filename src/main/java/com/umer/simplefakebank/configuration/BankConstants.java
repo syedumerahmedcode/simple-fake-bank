@@ -15,6 +15,7 @@ public class BankConstants {
 	/*
 	 * Error messages
 	 */
+	// TODO: Perhaps use more descriptive or better name for error messsages
 	public static final String ERROR_MESSAGE_NULL_REQUEST_ACCOUNT_DTO = "Request account DTO is null";
 	public static final String ERROR_MESSAGE_NULL_REQUEST_OPERATION_DTO = "Request operation DTO is null";
 	public static final String ERROR_USER_NOT_FOUND = "User not found id={}";
