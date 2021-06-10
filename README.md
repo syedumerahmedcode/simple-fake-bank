@@ -1,5 +1,11 @@
 # simple-fake-bank
 
+## Table of content
+-[Introduction](#introduction)
+-[Technologies Used](#technologies-used)
+-[Swagger](#swagger)
+-[Contact Information](#contact-information)
+
 ## Introduction
 
 This project contains an application which can be used to:
@@ -9,7 +15,7 @@ This project contains an application which can be used to:
 - Retrieve balance for a given account.
 - Retrieve transaction history for a given account.
 
-## Tehnologies Used
+## Technologies Used
 
 - Java 11
 - [SpringBoot](https://start.spring.io/): Used to create easy stand-alone, production-grade Spring based Applications.
