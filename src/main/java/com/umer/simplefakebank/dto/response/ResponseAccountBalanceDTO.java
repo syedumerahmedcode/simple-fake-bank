@@ -19,6 +19,7 @@ import lombok.NoArgsConstructor;
 @ApiModel(value = "Account balance response.", description = "The balance of an account.")
 public class ResponseAccountBalanceDTO {
 
+	// TODO: The variable should be named account_id. Think about it!
 	@JsonProperty("account_id")
 	@ApiModelProperty(notes = "The Account Id.")
 	private Long id;
