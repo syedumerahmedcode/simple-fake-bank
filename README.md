@@ -1,10 +1,10 @@
 # simple-fake-bank
 
 ## Table of content
--[Introduction](#introduction)
--[Technologies Used](#technologies-used)
--[Swagger](#swagger)
--[Contact Information](#contact-information)
+- [Introduction](#introduction)
+- [Technologies Used](#technologies-used)
+- [Swagger](#swagger)
+- [Contact Information](#contact-information)
 
 ## Introduction
 
