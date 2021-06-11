@@ -1,12 +1,19 @@
 package com.umer.simplefakebank.service;
 
+import static com.umer.simplefakebank.configuration.BankConstants.ERROR_ACCOUNT_NOT_FOUND;
+
 import java.math.BigDecimal;
-import java.util.Optional;
+import java.time.LocalDateTime;
+
+import javax.validation.Valid;
 
 import org.springframework.stereotype.Service;
 
+import com.umer.simplefakebank.dto.request.RequestAccountDTO;
+import com.umer.simplefakebank.dto.response.ResponseAccountBalanceDTO;
+import com.umer.simplefakebank.dto.response.ResponseAccountDTO;
 import com.umer.simplefakebank.entities.Account;
-import com.umer.simplefakebank.entities.User;
+import com.umer.simplefakebank.exception.AccountNotFoundException;
 import com.umer.simplefakebank.repsitory.AccountReposoitory;
 import com.umer.simplefakebank.repsitory.UserRepository;
 
@@ -21,35 +28,34 @@ public class AccountService {
 	private final AccountReposoitory accountReposoitory;
 	private final UserRepository userRepository;
 
-	// TODO: Further improvements:
-	/*
-	 * 1) Create mappers that contain user infomration 2) Read Request DTO from
-	 * Controller 3) Create a response mapper 4) Return response mapper from this
-	 * method to the controller
-	 */
-	public void createNewAccount(Long userId) {
-		log.debug("Creatging a new account - {}", userId);
+	
+	public ResponseAccountDTO createNewAccount(@Valid RequestAccountDTO requestAccountDTO) {
+		log.debug("Creatging a new account - {}", requestAccountDTO);
 
-		// Get User from the Id
-		Optional<User> user = userRepository.findById(userId);
-		Account account = Account.builder().id(1L).initialDepositAmount(BigDecimal.valueOf(100L)).build();
-		account = accountReposoitory.save(account);
-
-		log.debug("Created Account - {}", account);
+		
+		ResponseAccountDTO responseAccountDTO=new ResponseAccountDTO();
+		log.debug("Created Account - {}", responseAccountDTO);
+		return responseAccountDTO;
+	}
+	
+	public ResponseAccountBalanceDTO retrieveBalance(Long accountId) {
+		log.debug("Retreiving balance from account Id: {}", accountId);
+		Account account=accountReposoitory.findById(accountId)
+				.orElseThrow(()->{
+					log.error(ERROR_ACCOUNT_NOT_FOUND,accountId);
+					throw new AccountNotFoundException();
+				});
+		return ResponseAccountBalanceDTO.builder()
+				.id(accountId)
+				.balance(account.getBalance())
+				.creationTimestamp(LocalDateTime.now())
+				.build();
 	}
 
 	public void transfer(Account senderAccount, Account receiverAccount, BigDecimal value) {
 		log.debug("Starting transfer from sender account:[{}] to receiver account:[{}] --> amount[{}]", senderAccount,
 				receiverAccount, value);
-		//TODO: Do error check first before executing the transfer
 		
-		// Update account values
-		senderAccount.setBalance(senderAccount.getBalance().min(value));
-		receiverAccount.setBalance(receiverAccount.getBalance().add(value));
-		
-		// save new account information
-		accountReposoitory.save(senderAccount);
-		accountReposoitory.save(receiverAccount);
 		
 
 		log.debug("Finished transfer from sender account:[{}] to receiver account:[{}] --> amount[{}]", senderAccount,
