@@ -14,6 +14,15 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Account Controller exposing 2 methods:
+ * - GET
+ * 		For the givem account Id, it retrieves the balance.
+ * - POST
+ * 		Creates a new account. The response contains user id and initial amount.
+ * @author umer
+ *
+ */
 @RestController
 @RequiredArgsConstructor
 public class AccountController {
