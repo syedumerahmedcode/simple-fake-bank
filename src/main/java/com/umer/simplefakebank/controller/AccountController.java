@@ -1,11 +1,16 @@
 package com.umer.simplefakebank.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.umer.simplefakebank.dto.request.RequestAccountDTO;
 import com.umer.simplefakebank.dto.response.ResponseAccountBalanceDTO;
 import com.umer.simplefakebank.service.AccountService;
 
@@ -44,6 +49,23 @@ public class AccountController {
 	})
 	public ResponseEntity<ResponseAccountBalanceDTO> getBalance(@PathVariable("id") final long accountId) {
 		return ResponseEntity.ok(accountService.retrieveBalance(accountId));
+	}
+	
+	
+	@PostMapping(
+			path = ACCOUNT_END_POINT_V1,
+			consumes = MediaType.APPLICATION_JSON_VALUE,
+			produces = MediaType.APPLICATION_JSON_VALUE			
+			)
+	public ResponseEntity postAccount(@Valid @RequestBody RequestAccountDTO requestAccountDTO) {
+		
+		// Call service layer for creating a new account
+		
+		// Create a URI for the response entity.
+		
+		// Pass URI in the response entity		
+		// TODO: This is a scaffolding of the response. Enrich the created ResponseEntity with URI.
+		return ResponseEntity.accepted().build();
 	}
 
 }
