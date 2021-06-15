@@ -54,7 +54,23 @@ public class AccountController {
 		return ResponseEntity.ok(accountService.retrieveBalance(accountId));
 	}
 
-	@PostMapping(path = ACCOUNT_END_POINT_V1, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(
+			path = ACCOUNT_END_POINT_V1, 
+			consumes = MediaType.APPLICATION_JSON_VALUE, 
+			produces = MediaType.APPLICATION_JSON_VALUE
+	)
+	@ApiOperation(
+			value = "Create a new account.",
+			notes = "Creates a new bank account with an initial deposit amount for a customer.\n"+
+					"A single user may have multiple bank acoounts."
+	)
+	@ApiResponses(
+			value = {
+					@ApiResponse(code = 201, message = "Accoint created."),
+					@ApiResponse(code = 400, message = "Cutomer not found to create an account."),
+					@ApiResponse(code = 404, message = "Invalid request regarding new account information: negative initial amount, negative customer id.")
+			}
+	)
 	public ResponseEntity postAccount(@Valid @RequestBody RequestAccountDTO requestAccountDTO) {
 
 		// Call service layer for creating a new account
