@@ -24,14 +24,10 @@ public class User {
 	@Column(name = TABLE_PREFIX + "id")
 	private Long id;
 
+	// TODO: Break this in first_name and last_name fields.
 	@NotNull
-	@NotBlank(message = "First name is mandatory.")
-	@Column(name = TABLE_PREFIX + "first_name")
-	private String firstName;
-
-	@NotNull
-	@NotBlank(message = "Last name is mandatory.")
-	@Column(name = TABLE_PREFIX + "last_name")
-	private String lastName;
+	@NotBlank(message = "Name is mandatory")
+	@Column(name = TABLE_PREFIX + "name")
+	private String name;
 
 }
