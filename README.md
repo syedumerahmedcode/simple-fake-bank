@@ -4,6 +4,7 @@
 - [Introduction](#introduction)
 - [Technologies Used](#technologies-used)
 - [Swagger](#swagger)
+- [Commands](#commands)
 - [Contact Information](#contact-information)
 
 ## Introduction
@@ -25,6 +26,13 @@ This project contains an application which can be used to:
 
 ## Swagger
 > - TODO: To be written.
+
+## Commands
+To compile and test, please execute
+> mvn clean install
+
+To run the application, please execute
+> mvn spring-boot:run
 
 ## Contact Information
 
