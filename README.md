@@ -5,6 +5,7 @@
 - [Technologies Used](#technologies-used)
 - [Swagger](#swagger)
 - [Commands](#commands)
+- [API Documentation](#api-documentation)
 - [Contact Information](#contact-information)
 
 ## Introduction
@@ -33,6 +34,9 @@ To compile and test, please execute
 
 To run the application, please execute
 > mvn spring-boot:run
+
+## API Documentation
+In order to read the API documentation in Swagger, please first start the application and the visit [API Documentation in Swagger](http://localhost:8080/swagger-ui/)
 
 ## Contact Information
 
