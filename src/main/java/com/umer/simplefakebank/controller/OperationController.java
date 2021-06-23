@@ -41,7 +41,7 @@ public class OperationController {
 	private final OperationService operationService;
 
 	@GetMapping(
-			path = OPERATION_END_POINT_V1, 
+			path = OPERATION_GET_END_POINT, 
 			produces = MediaType.APPLICATION_JSON_VALUE			
 	)
 	@ApiOperation(
@@ -55,8 +55,22 @@ public class OperationController {
 		return ResponseEntity.ok(operationService.retrieveOperations(accountId));
 	}
 
-	@PostMapping(path = "/tbd")
+	@PostMapping(
+			path = OPERATION_END_POINT_V1,
+			produces = MediaType.APPLICATION_JSON_VALUE,
+			consumes = MediaType.APPLICATION_JSON_VALUE
+	)
+	@ApiOperation(
+			value = "Creates a new transfer.",
+			notes = "Transfers amount between any two accounts, including those owned by different customers."
+	)
+	@ApiResponses(value= {
+			@ApiResponse(code = 201, message = "Transfer created."),
+			@ApiResponse(code = 404, message = "Sender/reciever account not found."),
+			@ApiResponse(code = 400, message= "Sender/reciever account id is negative, Insufficient balance to transfer, same account used in the transfer operation.")
+	})
 	public ResponseEntity reateNewOperation(@Valid @RequestBody RequestOperationDTO requestOperationDTO) {
+		// TODO: Implement controller and service methods.
 		return null;
 	}
 
