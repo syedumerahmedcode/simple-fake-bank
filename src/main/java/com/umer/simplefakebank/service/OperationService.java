@@ -25,7 +25,9 @@ public class OperationService {
 		return null;
 	}
 	
-	public ResponseOperationsDTO retrieveOperations(long account) {
+	public ResponseOperationsDTO retrieveOperations(long accountId) {
+		log.debug("Retriving operations for the account: {}", accountId);
+		
 		return null;
 	}
 	

@@ -79,6 +79,14 @@ public class AccountService {
 				.creationTimestamp(LocalDateTime.now())
 				.build();
 	}
+	
+	Account getAccountById(Long accountId) {
+		return accountReposoitory.findById(accountId)
+				.orElseThrow(() ->{
+					log.error(ERROR_ACCOUNT_NOT_FOUND, accountId);
+					throw new AccountNotFoundException();
+				});
+	}
 
 	public void transfer(Account senderAccount, Account receiverAccount, BigDecimal value) {
 		log.debug("Starting transfer from sender account:[{}] to receiver account:[{}] --> amount[{}]", senderAccount,
