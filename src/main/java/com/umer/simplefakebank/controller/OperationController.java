@@ -27,7 +27,7 @@ public class OperationController {
 	
 	@GetMapping(path = "/tbd")
 	public ResponseEntity<ResponseOperationsDTO> getOperations(@PathVariable("accountId") final long accountId){
-		return null;
+		return ResponseEntity.ok(operationService.retrieveOperations(accountId));
 	}
 	
 	@PostMapping(path = "/tbd")

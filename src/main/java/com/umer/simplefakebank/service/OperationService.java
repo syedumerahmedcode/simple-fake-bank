@@ -23,19 +23,18 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 @RequiredArgsConstructor
 public class OperationService {
-	
+
 	private final AccountService accountService;
 	private final OperationRepository operationRepository;
-	
-	
+
 	public ResponseOperationDTO createNewOperation(@Valid RequestOperationDTO requestOperationDTO) {
 		return null;
 	}
-	
+
 	public ResponseOperationsDTO retrieveOperations(long accountId) {
 		log.debug("Retriving operations for the account: {}", accountId);
-		
-		//fetch the account for the given accountId
+
+		// fetch the account for the given accountId
 		// TODO: Create a method out of it for cleaner code.
 		Account account = accountService.getAccountById(accountId);
 		List<ResponseOperationDTO> operationDTOList = operationRepository
@@ -43,19 +42,13 @@ public class OperationService {
 						account.getId())
 				.orElse(new ArrayList<>()).stream().map(BankMapper::toResponseOperationDTO)
 				.collect(Collectors.toList());
-		return ResponseOperationsDTO.builder()
-				.accountId(accountId)
-				.operationDTOList(operationDTOList)
-				.creationTimestamp(getCurrentTimestamp())
-				.build();
-				
-		
+		return ResponseOperationsDTO.builder().accountId(accountId).operationDTOList(operationDTOList)
+				.creationTimestamp(getCurrentTimestamp()).build();
+
 	}
-	
-	
+
 	LocalDateTime getCurrentTimestamp() {
 		return LocalDateTime.now();
 	}
-	
 
 }
