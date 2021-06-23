@@ -13,6 +13,10 @@ import com.umer.simplefakebank.dto.request.RequestOperationDTO;
 import com.umer.simplefakebank.dto.response.ResponseOperationsDTO;
 import com.umer.simplefakebank.service.OperationService;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 import org.springframework.http.MediaType;
 import lombok.RequiredArgsConstructor;
 
@@ -40,6 +44,13 @@ public class OperationController {
 			path = OPERATION_END_POINT_V1, 
 			produces = MediaType.APPLICATION_JSON_VALUE			
 	)
+	@ApiOperation(
+			value = "Retrieves the transaction history for a given account.", 
+			notes = "Given the account Id, it retriieves the operations/transfer wher this account has participated.")
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "List of operations."),
+			@ApiResponse(code = 404, message = "Account not found.")
+	})
 	public ResponseEntity<ResponseOperationsDTO> getOperations(@PathVariable("accountId") final long accountId) {
 		return ResponseEntity.ok(operationService.retrieveOperations(accountId));
 	}
