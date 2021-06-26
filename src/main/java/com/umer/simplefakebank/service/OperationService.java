@@ -46,6 +46,14 @@ public class OperationService {
 				.creationTimestamp(getCurrentTimestamp()).build();
 
 	}
+	
+	public ResponseOperationDTO createOperationService(@Valid RequestOperationDTO requestOperationDTO) {
+		log.debug("Creating a new operation - {}", requestOperationDTO);
+		
+		// TODO: Implement logic!!!
+		return null;
+		
+	}
 
 	LocalDateTime getCurrentTimestamp() {
 		return LocalDateTime.now();

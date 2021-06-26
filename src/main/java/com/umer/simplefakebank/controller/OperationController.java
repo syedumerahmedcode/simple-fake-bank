@@ -69,7 +69,7 @@ public class OperationController {
 			@ApiResponse(code = 404, message = "Sender/reciever account not found."),
 			@ApiResponse(code = 400, message= "Sender/reciever account id is negative, Insufficient balance to transfer, same account used in the transfer operation.")
 	})
-	public ResponseEntity reateNewOperation(@Valid @RequestBody RequestOperationDTO requestOperationDTO) {
+	public ResponseEntity createNewOperation(@Valid @RequestBody RequestOperationDTO requestOperationDTO) {
 		// TODO: Implement controller and service methods.
 		return null;
 	}
