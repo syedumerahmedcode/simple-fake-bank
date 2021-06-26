@@ -77,8 +77,11 @@ public class AccountController {
 		ResponseAccountDTO responseAccountDTO = accountService.createNewAccount(requestAccountDTO);
 
 		// Create a URI for the response entity.
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-				.buildAndExpand(responseAccountDTO.getId()).toUri();
+		URI uri = ServletUriComponentsBuilder
+				.fromCurrentRequest()
+				.path("/{id}")
+				.buildAndExpand(responseAccountDTO.getId())
+				.toUri();
 
 		// Pass URI in the response entity
 		return ResponseEntity.created(uri).build();
