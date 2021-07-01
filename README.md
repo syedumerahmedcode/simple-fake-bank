@@ -28,7 +28,29 @@ This project contains an application which can be used to:
 - [Git Actions](https://docs.github.com/en/actions): GitHub Actions helps automate tasks within the software development life cycle. GitHub Actions are event-driven, meaning that you can run a series of commands after a specified event has occurred. They happen directly on the Github repo itself.
 
 ## Swagger
-> - TODO: To be written.
+Following are the available endpoints
+
+>1 POST http://localhost:8080/v1/accounts
+Creates a new account
+
+Input:
+
+```
+{
+"initial_amount": 0,
+"user_id": 0
+}
+```
+
+Output:
+
+```
+{
+  "body": {},
+  "statusCode": "ACCEPTED",
+  "statusCodeValue": 0
+}
+```
 
 ## Commands
 To compile and test, please execute
