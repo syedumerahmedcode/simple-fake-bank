@@ -30,7 +30,7 @@ This project contains an application which can be used to:
 ## Swagger
 Following are the available endpoints
 
->1 POST http://localhost:8080/v1/accounts
+>1. POST http://localhost:8080/v1/accounts
 Creates a new account
 
 Input:
@@ -49,6 +49,63 @@ Output:
   "body": {},
   "statusCode": "ACCEPTED",
   "statusCodeValue": 0
+}
+```
+
+>2. GET http://localhost:8080/v1/accounts/{id}
+Retrieves the account balance
+
+Output:
+
+```
+{
+  "account_id": 0,
+  "balance": 0,
+  "created_at": "2021-04-01T17:26:40.264Z"
+}
+```
+
+>3. POST http://localhost:8080/v1/operations
+Creates a transfer between accounts
+
+Input:
+
+```
+{
+  "receiver_account_id": 0,
+  "sender_account_id": 0,
+  "value": 0
+}
+```
+
+Output:
+
+```
+{
+  "body": {},
+  "statusCode": "ACCEPTED",
+  "statusCodeValue": 0
+}
+```
+
+>4. GET http://localhost:8080/v1/operations/fromAccount/{accountId}
+Get the history of operations for the provided account Id.
+
+Output:
+
+```
+{
+  "account_id": 0,
+  "created_at": "2021-04-01T17:29:13.493Z",
+  "operations": [
+    {
+      "created_at": "2021-04-01T17:29:13.493Z",
+      "operation_id": 0,
+      "receiver_account_id": 0,
+      "sender_account_id": 0,
+      "value": 0
+    }
+  ]
 }
 ```
 
