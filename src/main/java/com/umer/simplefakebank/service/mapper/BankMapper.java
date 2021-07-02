@@ -12,8 +12,8 @@ public class BankMapper {
 	public static Account toAccountEntity(RequestAccountDTO requestAccountDTO) {
 		return Account
 				.builder()
-				.initialDepositAmount(requestAccountDTO.getInitailDeposotAmount())
-				.balance(requestAccountDTO.getInitailDeposotAmount())
+				.initialDepositAmount(requestAccountDTO.getInitailDepositAmount())
+				.balance(requestAccountDTO.getInitailDepositAmount())
 				.build();
 	}
 	

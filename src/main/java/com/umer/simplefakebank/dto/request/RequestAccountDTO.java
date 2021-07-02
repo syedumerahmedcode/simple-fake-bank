@@ -34,6 +34,6 @@ public class RequestAccountDTO {
 	@NotNull
 	@DecimalMin(value = "0.0", inclusive = false, message = INVALID_INITIAL_AMOUNT)
 	@ApiModelProperty(notes = "Initial deposit amount, format 0.00")
-	private BigDecimal initailDeposotAmount;
+	private BigDecimal initailDepositAmount;
 
 }
