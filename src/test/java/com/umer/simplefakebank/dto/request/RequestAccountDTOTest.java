@@ -32,7 +32,7 @@ public class RequestAccountDTOTest {
 	}
 
 	@Test
-	void invalidUserIdTest() {
+	void checkViolation_WhenUserIdIsInvalid() {
 		final long invalidUserId = 0L;
 		final BigDecimal validInitailDepositAmount = new BigDecimal("0.01");
 		RequestAccountDTO requestAccountDTO = new RequestAccountDTO(invalidUserId, validInitailDepositAmount);
@@ -41,6 +41,19 @@ public class RequestAccountDTOTest {
 		assertThat(violations.size()).isEqualTo(1);
 		violations.forEach(action -> assertThat(action.getMessage())
 				.isEqualTo(INVALID_USER_ID));
+	}
+	
+	@Test
+	void checkViolation_WhenInitialAmountIsInvalid() {
+		final long validUserId = 1L;
+		final BigDecimal invalidInitailDepositAmount = new BigDecimal("0.00");
+		RequestAccountDTO requestAccountDTO=new RequestAccountDTO(validUserId, invalidInitailDepositAmount);
+		Set<ConstraintViolation<RequestAccountDTO>> violations=validator.validate(requestAccountDTO);
+		
+		assertThat(violations.size()).isEqualTo(1);
+		violations.forEach(action ->assertThat(action.getMessage())
+				.isEqualTo(INVALID_INITIAL_AMOUNT));
+		
 	}
 
 }
