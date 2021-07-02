@@ -1,6 +1,7 @@
 package com.umer.simplefakebank.dto.request;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static com.umer.simplefakebank.configuration.BankConstants.*;
 
 import java.math.BigDecimal;
 import java.util.Set;
@@ -29,7 +30,17 @@ public class RequestAccountDTOTest {
 		Set<ConstraintViolation<RequestAccountDTO>> violations = validator.validate(requestAccountDTO);
 		assertThat(violations.size()).isZero();
 	}
-	
-	
+
+	@Test
+	void invalidUserIdTest() {
+		final long invalidUserId = 0L;
+		final BigDecimal validInitailDepositAmount = new BigDecimal("0.01");
+		RequestAccountDTO requestAccountDTO = new RequestAccountDTO(invalidUserId, validInitailDepositAmount);
+		Set<ConstraintViolation<RequestAccountDTO>> violations = validator.validate(requestAccountDTO);
+
+		assertThat(violations.size()).isEqualTo(1);
+		violations.forEach(action -> assertThat(action.getMessage())
+				.isEqualTo(INVALID_USER_ID));
+	}
 
 }
