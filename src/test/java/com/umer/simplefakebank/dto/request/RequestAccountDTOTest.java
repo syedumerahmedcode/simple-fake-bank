@@ -55,5 +55,18 @@ public class RequestAccountDTOTest {
 				.isEqualTo(INVALID_INITIAL_AMOUNT));
 		
 	}
+	
+	@Test
+	void checkViolation_WhenInitialAmountHasInvalidFractionPart() {
+		final long validUserId = 1L;
+		final BigDecimal invalidInitailDepositAmount = new BigDecimal("5.025");
+		RequestAccountDTO requestAccountDTO=new RequestAccountDTO(validUserId, invalidInitailDepositAmount);
+		Set<ConstraintViolation<RequestAccountDTO>> violations=validator.validate(requestAccountDTO);
+		
+		assertThat(violations.size()).isEqualTo(1);
+		violations.forEach(action ->assertThat(action.getMessage())
+				.isEqualTo(INVALID_INITIAL_AMOUNT_FORMAT));
+		
+	}
 
 }

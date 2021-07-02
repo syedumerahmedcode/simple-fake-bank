@@ -3,6 +3,7 @@ package com.umer.simplefakebank.dto.request;
 import java.math.BigDecimal;
 
 import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
@@ -33,6 +34,7 @@ public class RequestAccountDTO {
 	@JsonProperty("initial_amount")
 	@NotNull
 	@DecimalMin(value = "0.0", inclusive = false, message = INVALID_INITIAL_AMOUNT)
+	@Digits(integer = 12, fraction = 2,message = INVALID_INITIAL_AMOUNT_FORMAT)
 	@ApiModelProperty(notes = "Initial deposit amount, format 0.00")
 	private BigDecimal initailDepositAmount;
 
