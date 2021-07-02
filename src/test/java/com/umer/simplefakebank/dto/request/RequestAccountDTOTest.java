@@ -23,9 +23,13 @@ public class RequestAccountDTOTest {
 
 	@Test
 	void validUserIdTest() {
-		RequestAccountDTO requestAccountDTO = new RequestAccountDTO(1L, new BigDecimal("0.01"));
+		final long validUserId = 1L;
+		final BigDecimal validInitailDepositAmount = new BigDecimal("0.01");
+		RequestAccountDTO requestAccountDTO = new RequestAccountDTO(validUserId, validInitailDepositAmount);
 		Set<ConstraintViolation<RequestAccountDTO>> violations = validator.validate(requestAccountDTO);
 		assertThat(violations.size()).isZero();
 	}
+	
+	
 
 }
