@@ -47,7 +47,28 @@ public class RequestOperationDTOTest {
 				value);
 		Set<ConstraintViolation<RequestOperationDTO>> violations = validator.validate(requestOperationDTO);
 		assertThat(violations.size()).isEqualTo(1);
+		// TODO: Think what is better, creating a parametrized test or creating two sseparate tests.
 		if (invalidSenderAccount == null) {
+			violations.forEach(action -> assertThat(action.getMessage())
+					.isEqualTo("must not be null"));
+		} else {
+			violations.forEach(action -> assertThat(action.getMessage())
+					.isEqualTo(INVALID_ACCOUNT_ID));
+		}
+	}
+	
+	@ParameterizedTest
+	@NullSource
+	@ValueSource(longs = { 0L })
+	void checkViolations_WhenReceiverAccountIsInvalid(Long invalidReceiverAccount) {
+		final long validSenderAccountId = 1L;
+		final BigDecimal value = new BigDecimal("100.00");
+		RequestOperationDTO requestOperationDTO = new RequestOperationDTO(validSenderAccountId, invalidReceiverAccount,
+				value);
+		Set<ConstraintViolation<RequestOperationDTO>> violations = validator.validate(requestOperationDTO);
+		assertThat(violations.size()).isEqualTo(1);
+		// TODO: Think what is better, creating a parametrized test or creating two sseparate tests.
+		if (invalidReceiverAccount == null) {
 			violations.forEach(action -> assertThat(action.getMessage())
 					.isEqualTo("must not be null"));
 		} else {
