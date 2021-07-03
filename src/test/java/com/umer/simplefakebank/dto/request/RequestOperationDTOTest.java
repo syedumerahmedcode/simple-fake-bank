@@ -18,6 +18,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 public class RequestOperationDTOTest {
 
+	private static final String INVALID_VALUE_FORMAT = "Invalid value format";
 	private static final String MUST_NOT_BE_NULL = "must not be null";
 	private static final String INVALID_VALUE = "Invalid value";
 	private static Validator validator;
@@ -77,7 +78,7 @@ public class RequestOperationDTOTest {
 	}
 	
 	@Test
-	void checkViolations_WhenValueIsInvalid() {
+	void checkViolations_WhenValueIsZero() {
 		final long validSenderAccountId = 1L;
 		final long validReceiverAccountId = 2L;
 		final BigDecimal invalidValue = new BigDecimal("0.00");
@@ -87,6 +88,34 @@ public class RequestOperationDTOTest {
 		assertThat(violations.size()).isEqualTo(1);
 		violations.forEach(action -> assertThat(action.getMessage())
 				.isEqualTo(INVALID_VALUE));
+		
+	}
+	
+	@Test
+	void checkViolations_WhenValueIsNegative() {
+		final long validSenderAccountId = 1L;
+		final long validReceiverAccountId = 2L;
+		final BigDecimal invalidValue = new BigDecimal("-1.00");
+		RequestOperationDTO requestOperationDTO = new RequestOperationDTO(validSenderAccountId, validReceiverAccountId,
+				invalidValue);
+		Set<ConstraintViolation<RequestOperationDTO>> violations = validator.validate(requestOperationDTO);
+		assertThat(violations.size()).isEqualTo(1);
+		violations.forEach(action -> assertThat(action.getMessage())
+				.isEqualTo(INVALID_VALUE));
+		
+	}
+	
+	@Test
+	void checkViolations_WhenValueFractionPartIsMoreThanTwoDigits() {
+		final long validSenderAccountId = 1L;
+		final long validReceiverAccountId = 2L;
+		final BigDecimal invalidValue = new BigDecimal("10.0001");
+		RequestOperationDTO requestOperationDTO = new RequestOperationDTO(validSenderAccountId, validReceiverAccountId,
+				invalidValue);
+		Set<ConstraintViolation<RequestOperationDTO>> violations = validator.validate(requestOperationDTO);
+		assertThat(violations.size()).isEqualTo(1);
+		violations.forEach(action -> assertThat(action.getMessage())
+				.isEqualTo(INVALID_VALUE_FORMAT));
 		
 	}
 
