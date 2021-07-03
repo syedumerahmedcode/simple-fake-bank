@@ -51,7 +51,7 @@ public class RequestOperationDTOTest {
 		assertThat(violations.size()).isEqualTo(1);
 		// TODO: Think what is better, creating a parametrized test or creating two sseparate tests.
 		if (invalidSenderAccount == null) {
-			violationEqualNullNotAllowed(violations);
+			violationEqualsNullNotAllowed(violations);
 		} else {
 			violationEqualsInvalidAccountId(violations);
 		}
@@ -71,7 +71,7 @@ public class RequestOperationDTOTest {
 		assertThat(violations.size()).isEqualTo(1);
 		// TODO: Think what is better, creating a parametrized test or creating two sseparate tests.
 		if (invalidReceiverAccount == null) {
-			violationEqualNullNotAllowed(violations);
+			violationEqualsNullNotAllowed(violations);
 		} else {
 			violationEqualsInvalidAccountId(violations);
 		}
@@ -86,8 +86,7 @@ public class RequestOperationDTOTest {
 				invalidValue);
 		Set<ConstraintViolation<RequestOperationDTO>> violations = validator.validate(requestOperationDTO);
 		assertThat(violations.size()).isEqualTo(1);
-		violations.forEach(action -> assertThat(action.getMessage())
-				.isEqualTo(INVALID_VALUE));
+		vioationEqualsInvalidValue(violations);
 		
 	}
 	
@@ -100,10 +99,11 @@ public class RequestOperationDTOTest {
 				invalidValue);
 		Set<ConstraintViolation<RequestOperationDTO>> violations = validator.validate(requestOperationDTO);
 		assertThat(violations.size()).isEqualTo(1);
-		violations.forEach(action -> assertThat(action.getMessage())
-				.isEqualTo(INVALID_VALUE));
+		vioationEqualsInvalidValue(violations);
 		
 	}
+
+	
 	
 	@Test
 	void checkViolations_WhenValueFractionPartIsMoreThanTwoDigits() {
@@ -119,7 +119,7 @@ public class RequestOperationDTOTest {
 		
 	}
 
-	private void violationEqualNullNotAllowed(Set<ConstraintViolation<RequestOperationDTO>> violations) {
+	private void violationEqualsNullNotAllowed(Set<ConstraintViolation<RequestOperationDTO>> violations) {
 		violations.forEach(action -> assertThat(action.getMessage())
 				.isEqualTo(MUST_NOT_BE_NULL));
 	}
@@ -127,6 +127,11 @@ public class RequestOperationDTOTest {
 	private void violationEqualsInvalidAccountId(Set<ConstraintViolation<RequestOperationDTO>> violations) {
 		violations.forEach(action -> assertThat(action.getMessage())
 				.isEqualTo(INVALID_ACCOUNT_ID));
+	}
+	
+	private void vioationEqualsInvalidValue(Set<ConstraintViolation<RequestOperationDTO>> violations) {
+		violations.forEach(action -> assertThat(action.getMessage())
+				.isEqualTo(INVALID_VALUE));
 	}
 
 }
