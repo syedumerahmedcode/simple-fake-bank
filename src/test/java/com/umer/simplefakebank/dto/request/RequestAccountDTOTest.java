@@ -23,7 +23,7 @@ public class RequestAccountDTOTest {
 	}
 
 	@Test
-	void validUserIdTest() {
+	void validUserInputTest() {
 		final long validUserId = 1L;
 		final BigDecimal validInitailDepositAmount = new BigDecimal("0.01");
 		RequestAccountDTO requestAccountDTO = new RequestAccountDTO(validUserId, validInitailDepositAmount);
