@@ -14,11 +14,14 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EmptySource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 public class RequestOperationDTOTest {
 
+	private static final String MUST_NOT_BE_NULL = "must not be null";
+	private static final String INVALID_VALUE = "Invalid value";
 	private static Validator validator;
 
 	@BeforeAll
@@ -55,10 +58,7 @@ public class RequestOperationDTOTest {
 		}
 	}
 
-	private void violationEqualsInvalidAccountId(Set<ConstraintViolation<RequestOperationDTO>> violations) {
-		violations.forEach(action -> assertThat(action.getMessage())
-				.isEqualTo(INVALID_ACCOUNT_ID));
-	}
+	
 	
 	@ParameterizedTest
 	@NullSource
@@ -77,10 +77,29 @@ public class RequestOperationDTOTest {
 			violationEqualsInvalidAccountId(violations);
 		}
 	}
+	
+	@Test
+	void checkViolations_WhenValueIsInvalid() {
+		final long validSenderAccountId = 1L;
+		final long validReceiverAccountId = 2L;
+		final BigDecimal invalidValue = new BigDecimal("0.00");
+		RequestOperationDTO requestOperationDTO = new RequestOperationDTO(validSenderAccountId, validReceiverAccountId,
+				invalidValue);
+		Set<ConstraintViolation<RequestOperationDTO>> violations = validator.validate(requestOperationDTO);
+		assertThat(violations.size()).isEqualTo(1);
+		violations.forEach(action -> assertThat(action.getMessage())
+				.isEqualTo(INVALID_VALUE));
+		
+	}
 
 	private void violationEqualNullNotAllowed(Set<ConstraintViolation<RequestOperationDTO>> violations) {
 		violations.forEach(action -> assertThat(action.getMessage())
-				.isEqualTo("must not be null"));
+				.isEqualTo(MUST_NOT_BE_NULL));
+	}
+	
+	private void violationEqualsInvalidAccountId(Set<ConstraintViolation<RequestOperationDTO>> violations) {
+		violations.forEach(action -> assertThat(action.getMessage())
+				.isEqualTo(INVALID_ACCOUNT_ID));
 	}
 
 }
