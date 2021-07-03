@@ -49,12 +49,15 @@ public class RequestOperationDTOTest {
 		assertThat(violations.size()).isEqualTo(1);
 		// TODO: Think what is better, creating a parametrized test or creating two sseparate tests.
 		if (invalidSenderAccount == null) {
-			violations.forEach(action -> assertThat(action.getMessage())
-					.isEqualTo("must not be null"));
+			violationEqualNullNotAllowed(violations);
 		} else {
-			violations.forEach(action -> assertThat(action.getMessage())
-					.isEqualTo(INVALID_ACCOUNT_ID));
+			violationEqualsInvalidAccountId(violations);
 		}
+	}
+
+	private void violationEqualsInvalidAccountId(Set<ConstraintViolation<RequestOperationDTO>> violations) {
+		violations.forEach(action -> assertThat(action.getMessage())
+				.isEqualTo(INVALID_ACCOUNT_ID));
 	}
 	
 	@ParameterizedTest
@@ -69,12 +72,15 @@ public class RequestOperationDTOTest {
 		assertThat(violations.size()).isEqualTo(1);
 		// TODO: Think what is better, creating a parametrized test or creating two sseparate tests.
 		if (invalidReceiverAccount == null) {
-			violations.forEach(action -> assertThat(action.getMessage())
-					.isEqualTo("must not be null"));
+			violationEqualNullNotAllowed(violations);
 		} else {
-			violations.forEach(action -> assertThat(action.getMessage())
-					.isEqualTo(INVALID_ACCOUNT_ID));
+			violationEqualsInvalidAccountId(violations);
 		}
+	}
+
+	private void violationEqualNullNotAllowed(Set<ConstraintViolation<RequestOperationDTO>> violations) {
+		violations.forEach(action -> assertThat(action.getMessage())
+				.isEqualTo("must not be null"));
 	}
 
 }
