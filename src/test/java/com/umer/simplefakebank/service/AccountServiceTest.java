@@ -16,6 +16,7 @@ import org.mockito.Spy;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.umer.simplefakebank.dto.request.RequestAccountDTO;
+import com.umer.simplefakebank.dto.response.ResponseAccountBalanceDTO;
 import com.umer.simplefakebank.dto.response.ResponseAccountDTO;
 import com.umer.simplefakebank.entities.Account;
 import com.umer.simplefakebank.entities.User;
@@ -161,7 +162,7 @@ public class AccountServiceTest {
 				.build();
 		Throwable throwable=Assertions.catchThrowable(()->accountService.transfer(sender, sender, BigDecimal.valueOf(1.01)));
 		Assertions.assertThat(throwable).isInstanceOf(TransferNotAllowedException.class);
-		
 	}
+
 
 }
