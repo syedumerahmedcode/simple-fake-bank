@@ -56,7 +56,7 @@ public class AccountService {
 		// Set missing fields
 		account.setUser(user);
 		account.setBalance(account.getInitialDepositAmount());
-		account.setCreateTimestamp(LocalDateTime.now());
+		account.setCreationTimestamp(getCurrentTimestamp());
 
 		account = accountReposoitory.save(account);
 
@@ -76,7 +76,7 @@ public class AccountService {
 				.builder()
 				.id(accountId)
 				.balance(account.getBalance())
-				.creationTimestamp(LocalDateTime.now())
+				.creationTimestamp(getCurrentTimestamp())
 				.build();
 	}
 	
@@ -95,5 +95,9 @@ public class AccountService {
 		log.debug("Finished transfer from sender account:[{}] to receiver account:[{}] --> amount[{}]", senderAccount,
 				receiverAccount, value);
 	}
+	
+	 LocalDateTime getCurrentTimestamp() {
+         return LocalDateTime.now();
+ }
 
 }

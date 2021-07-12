@@ -23,7 +23,7 @@ public class BankMapper {
 				.id(account.getId())
 				.userId(account.getUser().getId())
 				.balance(account.getBalance())
-				.creationTimestamp(account.getCreateTimestamp())
+				.creationTimestamp(account.getCreationTimestamp())
 				.build();				
 	}
 	

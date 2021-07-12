@@ -36,7 +36,7 @@ public class Account {
 
 	@NotNull
 	@Column(name = TABLE_PREFIX + "creation_timestamp", columnDefinition = "TIMESTAMP")
-	private LocalDateTime createTimestamp;
+	private LocalDateTime creationTimestamp;
 
 	@NotNull
 	@Column(name = TABLE_PREFIX + "balance")
