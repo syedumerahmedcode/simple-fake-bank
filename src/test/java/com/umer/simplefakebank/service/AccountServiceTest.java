@@ -22,6 +22,7 @@ import com.umer.simplefakebank.entities.User;
 import com.umer.simplefakebank.exception.AccountNotFoundException;
 import com.umer.simplefakebank.exception.InsufficientBalanceException;
 import com.umer.simplefakebank.exception.InvalidRequestAccountException;
+import com.umer.simplefakebank.exception.TransferNotAllowedException;
 import com.umer.simplefakebank.exception.UserNotFoundException;
 import com.umer.simplefakebank.repsitory.AccountReposoitory;
 import com.umer.simplefakebank.repsitory.UserRepository;
@@ -150,6 +151,17 @@ public class AccountServiceTest {
 		Throwable throwable = Assertions.catchThrowable(() ->accountService.transfer(sender, reciever, BigDecimal.valueOf(0.01)));
 		Assertions.assertThat(throwable).isInstanceOf(InsufficientBalanceException.class);
 		Assertions.assertThat(reciever.getBalance()).isEqualTo("5.0");
+	}
+	
+	@Test
+	void testTransferToSameAccountNotAllowed() {
+		Account sender=Account.builder()
+				.id(2L)
+				.balance(BigDecimal.valueOf(5.00))
+				.build();
+		Throwable throwable=Assertions.catchThrowable(()->accountService.transfer(sender, sender, BigDecimal.valueOf(1.01)));
+		Assertions.assertThat(throwable).isInstanceOf(TransferNotAllowedException.class);
+		
 	}
 
 }
