@@ -117,7 +117,22 @@ public class AccountServiceTest {
 		when(userRepository.findById(someId)).thenReturn(Optional.empty());
 		Throwable throwable=Assertions.catchThrowable(() -> accountService.getAccountById(someId));
 		Assertions.assertThat(throwable).isInstanceOf(AccountNotFoundException.class);
+	}
+	
+	@Test
+	void testSuccessfulTransfer() {
+		Account sender=Account.builder()
+				.id(1L)
+				.balance(BigDecimal.valueOf(10.00))
+				.build();
 		
+		Account reciever=Account.builder()
+				.id(2L)
+				.balance(BigDecimal.valueOf(5.00))
+				.build();
+		accountService.transfer(sender, reciever, BigDecimal.valueOf(0.50));
+		Assertions.assertThat(sender.getBalance()).isEqualTo("9.5");
+		Assertions.assertThat(reciever.getBalance()).isEqualTo("5.5");
 	}
 
 }
