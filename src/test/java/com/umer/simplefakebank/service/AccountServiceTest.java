@@ -19,6 +19,7 @@ import com.umer.simplefakebank.dto.request.RequestAccountDTO;
 import com.umer.simplefakebank.dto.response.ResponseAccountDTO;
 import com.umer.simplefakebank.entities.Account;
 import com.umer.simplefakebank.entities.User;
+import com.umer.simplefakebank.exception.AccountNotFoundException;
 import com.umer.simplefakebank.exception.InvalidRequestAccountException;
 import com.umer.simplefakebank.exception.UserNotFoundException;
 import com.umer.simplefakebank.repsitory.AccountReposoitory;
@@ -108,7 +109,15 @@ public class AccountServiceTest {
 		when(userRepository.findById(someId)).thenReturn(Optional.empty());
 		Throwable throwable = Assertions.catchThrowable(() -> accountService.createNewAccount(requestAccountDTO));
 		Assertions.assertThat(throwable).isInstanceOf(UserNotFoundException.class);
-
+	}
+	
+	@Test
+	void testGetAccountnotFound() {
+		Long someId=1L;
+		when(userRepository.findById(someId)).thenReturn(Optional.empty());
+		Throwable throwable=Assertions.catchThrowable(() -> accountService.getAccountById(someId));
+		Assertions.assertThat(throwable).isInstanceOf(AccountNotFoundException.class);
+		
 	}
 
 }
