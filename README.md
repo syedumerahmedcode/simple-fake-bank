@@ -7,6 +7,7 @@
 - [Commands](#commands)
 - [API Documentation](#api-documentation)
 - [Github Actions](#github-actions)
+- [Contribution](#contribution)
 - [Contact Information](#contact-information)
 
 ## Introduction
@@ -122,6 +123,10 @@ In order to read the API documentation in Swagger, please first start the applic
 
 ## Github Actions
 To ensure the correctness of the code committed, github action for 'building the java project using Maven' is used. This ensures that all tests are green and the projects runs correctly on Windows, MacOS and Linux systems.
+
+## Contribution
+
+Feature requests, issues, pull requests and questions are welcome.
 
 ## Contact Information
 
